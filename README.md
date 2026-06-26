@@ -1,16 +1,36 @@
-# Customer Churn Prediction MLOps Pipeline on AWS
+<div align="center">
 
-![Python](https://img.shields.io/badge/Python-3.12-blue?style=flat-square&logo=python)
-![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688?style=flat-square&logo=fastapi&logoColor=white)
-![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-ML-F7931E?style=flat-square&logo=scikitlearn&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?style=flat-square&logo=docker&logoColor=white)
-![Amazon ECR](https://img.shields.io/badge/Amazon_ECR-Container_Registry-FF9900?style=flat-square&logo=amazonaws&logoColor=white)
-![Amazon ECS](https://img.shields.io/badge/Amazon_ECS-Express_Service-FF9900?style=flat-square&logo=amazonaws&logoColor=white)
-![AWS CodeBuild](https://img.shields.io/badge/AWS_CodeBuild-CI-FF9900?style=flat-square&logo=amazonaws&logoColor=white)
-![AWS CodePipeline](https://img.shields.io/badge/AWS_CodePipeline-CD-FF9900?style=flat-square&logo=amazonaws&logoColor=white)
-![GitHub](https://img.shields.io/badge/GitHub-Version_Control-181717?style=flat-square&logo=github)
+# 🚀 Customer Churn Prediction MLOps Pipeline on AWS
+
+### End-to-End Machine Learning Deployment with CI/CD Automation
+
+A production-ready Machine Learning Operations (MLOps) pipeline that trains a Customer Churn Prediction model, containerizes it using Docker, stores images in Amazon ECR, and automatically deploys updates to Amazon ECS using AWS CodePipeline and CodeBuild.
+
+<br>
+
+![Python](https://img.shields.io/badge/Python-3.12+-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-0.110+-009688?style=for-the-badge&logo=fastapi&logoColor=white)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-Machine%20Learning-F7931E?style=for-the-badge&logo=scikitlearn&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Containerized-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+
+![Amazon ECR](https://img.shields.io/badge/Amazon_ECR-Container_Registry-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)
+![Amazon ECS](https://img.shields.io/badge/Amazon_ECS-Express_Service-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)
+![AWS CodeBuild](https://img.shields.io/badge/AWS_CodeBuild-CI-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)
+![AWS CodePipeline](https://img.shields.io/badge/AWS_CodePipeline-CD-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white)
+
+![GitHub](https://img.shields.io/badge/GitHub-Version_Control-181717?style=for-the-badge&logo=github&logoColor=white)
+
+<br>
+
+> **"Automated Machine Learning deployment pipeline using Docker, Amazon ECR, Amazon ECS, AWS CodeBuild, and AWS CodePipeline."**
+
+<br>
+
+
+</div>
 
 ---
+
 
 ## Table of Contents
 
