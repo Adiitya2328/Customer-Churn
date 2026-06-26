@@ -717,6 +717,9 @@ Old tasks deregistered and stopped
       ↓
 FastAPI container running on ECS — Publicly accessible
 ```
+## ECS Service
+![ECS Service](images/ecs_service.png)
+
 
 ## ECS Deployment History
 
@@ -754,6 +757,12 @@ FastAPI container running on ECS — Publicly accessible
 
 ![API Running](images/api_running.png)
 
+## API Prediction Running Successfully
+
+![Prediction](images/api_predict.png)
+
+## Swagger Docs
+![Swagger Docs](images/swagger.png)
 
 ---
 
