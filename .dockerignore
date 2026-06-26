@@ -2,5 +2,5 @@ venv/
 .git/
 __pycache__/
 .ipynb_checkpoints/
-screenshots/
+images/
 notebooks/
