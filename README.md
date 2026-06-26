@@ -874,7 +874,7 @@ The final deployed system successfully delivers on all project objectives:
 
 | Objective | Status |
 |---|---|
-| Predict customer churn with ML | Achieved — Random Forest model trained and serialized |
+| Predict customer churn with ML | Achieved — XG BOOST model trained and serialized |
 | Serve predictions via REST API | Achieved — FastAPI with GET and POST endpoints |
 | Run inside Docker container | Achieved — Dockerfile builds and runs locally and on ECS |
 | Store images in Amazon ECR | Achieved — ECR repository holding versioned images |
