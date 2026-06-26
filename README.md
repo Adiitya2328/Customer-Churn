@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🚀 Customer Churn Prediction MLOps Pipeline on AWS
+#  Customer Churn Prediction MLOps Pipeline on AWS
 
 ### End-to-End Machine Learning Deployment with CI/CD Automation
 
@@ -156,7 +156,7 @@ The value of a churn prediction system extends well beyond model accuracy metric
 | Amazon ECS Express Service | Managed container orchestration and deployment |
 | AWS CodeBuild | Automated Docker image build and ECR push |
 | AWS CodePipeline | End-to-end CI/CD pipeline orchestration |
-| Amazon CloudWatch | Container log collection and task monitoring |
+
 
 ### Version Control
 
@@ -281,7 +281,39 @@ Numeric features are examined for their correlation with the churn label. Monthl
 
 ## Exploratory Data Analysis
 
-![EDA Screenshot](images/eda-analysis.png)
+<table>
+<tr>
+<td width="50%">
+
+### ECS Service Monitoring
+<img src="images/churn_distribution.png" alt="Churn Distribution" width="100%">
+
+</td>
+<td width="50%">
+
+### Load Balancer Metrics
+<img src="images/contract_vs_churn.png" alt="Contract vs Churn" width="100%">
+
+</td>
+</tr>
+</table>
+
+<table>
+<tr>
+<td width="50%">
+
+### ECS Service Monitoring
+<img src="images/feature_importance.png" alt="Feature Importance" width="100%">
+
+</td>
+<td width="50%">
+
+### Load Balancer Metrics
+<img src="images/shap_summary.png" alt="Load Balancer Metrics" width="100%">
+
+</td>
+</tr>
+</table>
 
 ---
 
@@ -355,7 +387,7 @@ Model performance is evaluated on the held-out test set using a suite of classif
 
 Recall is treated as the most operationally important metric for this problem. A false negative — predicting that a customer will not churn when they actually will — is more costly than a false positive, because missed churners represent lost revenue with no intervention opportunity. A model that errs on the side of flagging more customers as potential churners is more useful in a retention context.
 
-The trained Random Forest model achieves strong baseline performance on this dataset, with F1 scores well above naive baseline classifiers, justifying its selection for deployment.
+The trained XG Boost model achieves strong baseline performance on this dataset, with F1 scores well above naive baseline classifiers, justifying its selection for deployment.
 
 ---
 
@@ -489,6 +521,9 @@ CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "8000"]
 docker build -t customer-churn-api .
 docker run -p 8000:8000 customer-churn-api
 ```
+## Docker Engine
+
+![Docker Images](images/docker_image.png)
 
 After running these commands, the API is accessible at `http://localhost:8000`. The container includes everything needed — Python runtime, installed packages, model artifacts — and nothing beyond what is necessary.
 
@@ -516,13 +551,13 @@ Each image pushed to ECR is tagged, typically with the CodeBuild build ID or a c
 
 ![ECR Repository](images/ecr_repository.png)
 
-> Replace with your actual screenshot file: `ecr_image_uploaded.png`
+
 
 ## ECR Images
 
 ![ECR Images](images/ecr_images.png)
 
-> Replace with your actual screenshot file: `ecr-Images.png`
+
 
 ---
 
@@ -552,19 +587,19 @@ This approach ensures that every code change results in a fresh Docker image bei
 
 ![CodeBuild Project](images/codebuild_project.png)
 
-> Replace with your actual screenshot file: `codebuild0.png`
+
 
 ## Successful Build
 
 ![CodeBuild Success](images/codebuild_success.png)
 
-> Replace with your actual screenshot file: `codebuild1.png`
+
 
 ## Build Logs
 
 ![Build Logs](images/codebuild_logs.png)
 
-> Replace with your actual screenshot file: `codebuild2.png`
+
 
 ---
 
@@ -596,25 +631,24 @@ Once the build stage succeeds, the `imagedefinitions.json` artifact is used to u
 
 ![Pipeline Creation](images/pipeline_creation.png)
 
-> Replace with your actual screenshot file: `pipeline.png`
+
 
 ## Pipeline Architecture
 
 ![Pipeline Architecture](images/pipeline_architecture.png)
 
-> Replace with your actual screenshot file: `CodePipelineArchitecture.png`
 
 ## Pipeline Execution
 
 ![Pipeline Execution](images/pipeline_execution.png)
 
-> Replace with your actual screenshot file: `codePipeline.png`
+
 
 ## Pipeline Success
 
 ![Pipeline Success](images/pipeline_success.png)
 
-> Replace with your actual screenshot file: `codePipeline-Success.png`
+
 
 ---
 
@@ -688,30 +722,38 @@ FastAPI container running on ECS — Publicly accessible
 
 ![ECS Deployment](images/ecs_deployment_history.png)
 
-> Replace with your actual screenshot file: `ecs-deployment-history.png`
 
-## ECS Service Resources
-
-![ECS Resources](images/ecs_resources.png)
-
-> Place your screenshot here showing: Load Balancer Active, Target Group Active, Service Active, and Deployment Completed status indicators.
 
 ## ECS Deployment Completed
 
 ![Deployment Success](images/ecs_deployment_success.png)
 
-> Place your screenshot here showing the "Deployment has completed" or "Service reached steady state" confirmation message from the ECS console.
+
+## ECS Service Observation
+
+<table>
+<tr>
+<td width="50%">
+
+### ECS Service Monitoring
+<img src="images/ecs_monitoring.png" alt="ECS Monitoring" width="100%">
+
+</td>
+<td width="50%">
+
+### Load Balancer Metrics
+<img src="images/load_balancer_metrics.png" alt="Load Balancer Metrics" width="100%">
+
+</td>
+</tr>
+</table>
+
+
 
 ## Public API Running Successfully
 
 ![API Running](images/api_running.png)
 
-> Place your screenshot here showing the live API response:
-> ```json
-> {
->   "message": "Customer Churn Prediction API is running"
-> }
-> ```
 
 ---
 
@@ -775,7 +817,7 @@ Once the ECS service reaches a steady state, the public FastAPI endpoint can be 
 **Health check:**
 
 ```bash
-curl http://<ECS-PUBLIC-ENDPOINT>/
+curl http://< cu-68d3b83770654c6abfc37d777e54f3d5.ecs.ap-south-1.on.aws>/
 ```
 
 Expected response:
@@ -789,7 +831,7 @@ Expected response:
 **Prediction request:**
 
 ```bash
-curl -X POST http://<ECS-PUBLIC-ENDPOINT>/predict \
+curl -X POST http://< cu-68d3b83770654c6abfc37d777e54f3d5.ecs.ap-south-1.on.aws>/predict \
   -H "Content-Type: application/json" \
   -d '{
     "tenure": 6,
@@ -813,7 +855,7 @@ Expected response for a high-risk customer profile:
 
 **Interactive documentation:**
 
-FastAPI automatically generates an interactive Swagger UI at `/docs`. By navigating to `http://<ECS-PUBLIC-ENDPOINT>/docs` in a browser, you can explore all available endpoints, view schema definitions, and execute test requests directly from the browser interface — without writing any curl commands.
+FastAPI automatically generates an interactive Swagger UI at `/docs`. By navigating to `http://< cu-68d3b83770654c6abfc37d777e54f3d5.ecs.ap-south-1.on.aws>/docs` in a browser, you can explore all available endpoints, view schema definitions, and execute test requests directly from the browser interface — without writing any curl commands.
 
 ---
 
