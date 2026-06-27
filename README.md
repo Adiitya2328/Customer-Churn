@@ -221,7 +221,7 @@ Customer-Churn/
 - `app.py` — The main FastAPI application that loads the trained model artifacts and exposes prediction endpoints. This is the entry point of the deployed service.
 - `requirements.txt` — Declares all Python dependencies needed to run the API, including fastapi, uvicorn, scikit-learn, and joblib.
 - `Dockerfile` — Defines how the application is packaged into a Docker container, including the base image, dependency installation, and application startup command.
-- `models/churn_model.pkl` — The serialized Random Forest classifier trained on the telecom churn dataset.
+- `models/churn_model.pkl` — The serialized XG BOOST model trained on the telecom churn dataset.
 - `models/feature_columns.pkl` — The serialized list of feature column names used during training, ensuring that the prediction API receives and processes input in the correct format.
 - `notebooks/churn_eda.ipynb` — The exploratory data analysis and model training notebook, documenting every step from raw data to trained model artifacts.
 - `deployment/ecr-buildspec.yml` — The build specification file used by AWS CodeBuild to build the Docker image and push it to Amazon ECR.
@@ -349,11 +349,25 @@ The preprocessed dataset is split into training and test sets using an 80/20 rat
 
 **Model selection:**
 
-A Random Forest classifier is selected for this task. Random Forest is an ensemble learning method that builds multiple decision trees during training and aggregates their outputs at inference time. It handles mixed feature types well, is robust to outliers, and provides feature importance scores that are useful for interpretability and debugging. It also performs reliably on tabular classification tasks without extensive hyperparameter tuning.
+## Model Training
 
-**Training:**
+The Customer Churn Prediction model was developed using XGBoost (Extreme Gradient Boosting), a highly efficient gradient boosting framework known for its performance and scalability.
 
-The model is fit on the training features and labels. Default hyperparameters are used as a baseline, with `n_estimators=100` decision trees in the ensemble.
+The training pipeline included:
+
+- Data preprocessing
+- Feature engineering
+- Train-test split
+- Model training using XGBClassifier
+- Model evaluation
+- Model serialization using Joblib
+
+The trained model was stored as:
+
+- churn_model.pkl
+- feature_columns.pkl
+
+These artifacts are loaded by the FastAPI application during inference.
 
 **Model and feature column persistence:**
 
@@ -940,7 +954,7 @@ Currently, ECS performs rolling updates — new tasks start while old ones are s
 
 This project delivers a complete, production-ready MLOps pipeline for customer churn prediction — one that goes well beyond training a model and demonstrates the full engineering discipline required to operate machine learning systems in the real world.
 
-Starting from raw customer data, a Random Forest classifier is trained, evaluated, and serialized into portable model artifacts. These artifacts are loaded by a FastAPI service that exposes prediction capabilities through a clean REST API. The service is packaged inside a Docker container for environment consistency and stored as versioned images in Amazon ECR. AWS CodeBuild automates the image build process, and AWS CodePipeline orchestrates the end-to-end CI/CD workflow — from a GitHub commit to a live container on ECS — without any manual steps.
+Starting from raw customer data, a XG BOOST model is trained, evaluated, and serialized into portable model artifacts. These artifacts are loaded by a FastAPI service that exposes prediction capabilities through a clean REST API. The service is packaged inside a Docker container for environment consistency and stored as versioned images in Amazon ECR. AWS CodeBuild automates the image build process, and AWS CodePipeline orchestrates the end-to-end CI/CD workflow — from a GitHub commit to a live container on ECS — without any manual steps.
 
 The project also captures a real-world production debugging experience: a deployment failure caused by model artifacts being excluded from the Docker build through a `.gitignore` pattern. Diagnosing this failure using ECS task inspection and CloudWatch logs, identifying the root cause, and implementing the fix reflects the kind of problem-solving that distinguishes engineers who have shipped systems to production from those who have only trained models.
 
